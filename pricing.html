@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pricing - Gym Aesthetic</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* Persistent selection style for pricing cards */
+    .pricing-card {
+      cursor: pointer;
+    }
+    .pricing-card.selected {
+      outline: 2px solid var(--secondary-color);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    }
+    /* Style for the Proceed button */
+    #proceedBtn {
+      opacity: 0;
+      visibility: hidden;
+      padding: 10px 20px;
+      margin: 20px auto;
+      border: none;
+      background: var(--accent-gradient);
+      color: var(--white);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: opacity 0.5s ease;
+      display: block;
+      width: auto;
+    }
+    #proceedBtn:hover {
+      transform: translateY(-2px);
+    }
+    /* Class to show the button with !important to override the ID styles */
+    .show-btn {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+  </style>
+  <script>
+    function selectCard(cardElement) {
+      // Remove selected class from all pricing cards
+      const cards = document.querySelectorAll('.pricing-card');
+      cards.forEach(card => card.classList.remove('selected'));
+      // Add the selected class to the clicked card
+      cardElement.classList.add('selected');
+      
+      // Check the radio input inside this card
+      const radio = cardElement.querySelector('input[name="plan"]');
+      radio.checked = true;
+      
+      // Show the Proceed button
+      document.getElementById("proceedBtn").classList.add("show-btn");
+    }
+    
+    function proceedPlan(e) {
+      e.preventDefault();
+      // Get selected plan
+      const plans = document.getElementsByName('plan');
+      let selectedPlan = null;
+      for (let plan of plans) {
+        if (plan.checked) {
+          selectedPlan = plan.value;
+          break;
+        }
+      }
+      if (!selectedPlan) {
+        alert("Please select a plan.");
+        return;
+      }
+      // Store the selected plan in localStorage
+      localStorage.setItem("selectedPlan", selectedPlan);
+      // Redirect based on login status
+      const loggedInUser = localStorage.getItem("loggedInUser");
+      if (loggedInUser) {
+        window.location.href = "payment.html";
+      } else {
+        window.location.href = "login.html";
+      }
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="pricing.html" class="active">Pricing</a></li>
+        <li><a href="schedule.html">Classes Schedule</a></li>
+        <li><a href="trainers.html">Trainers</a></li>
+        <li><a href="facility.html">Facility</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="content">
+    <h2 style="text-align: center;">Pricing Plans</h2>
+    <form id="pricingForm">
+      <div class="pricing-container">
+        <div class="pricing-card" onclick="selectCard(this)">
+          <h3>Basic Plan</h3>
+          <p>Rp150,000 / month</p>
+          <ul>
+            <li>Access to gym equipment</li>
+            <li>Free group classes</li>
+          </ul>
+          <input type="radio" name="plan" value="basic" id="basic" required>
+          <label for="basic" class="btn">Choose Basic</label>
+        </div>
+
+        <div class="pricing-card" onclick="selectCard(this)">
+          <h3>Premium Plan</h3>
+          <p>Rp250,000 / month</p>
+          <ul>
+            <li>All basic features</li>
+            <li>Access to premium classes</li>
+            <li>One personal training session per month</li>
+          </ul>
+          <input type="radio" name="plan" value="premium" id="premium">
+          <label for="premium" class="btn">Choose Premium</label>
+        </div>
+
+        <div class="pricing-card" onclick="selectCard(this)">
+          <h3>Elite Plan</h3>
+          <p>Rp350,000 / month</p>
+          <ul>
+            <li>All premium features</li>
+            <li>Unlimited personal training</li>
+            <li>Special workshops</li>
+          </ul>
+          <input type="radio" name="plan" value="elite" id="elite">
+          <label for="elite" class="btn">Choose Elite</label>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button id="proceedBtn" type="submit" onclick="proceedPlan(event)">Proceed</button>
+      </div>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Gym Aesthetic. All rights reserved.</p>
+  </footer>
+</body>
+</html>

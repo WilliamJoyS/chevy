@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payment Instructions - Gym Aesthetic</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script>
+    window.onload = function() {
+      if (!localStorage.getItem("loggedInUser")) {
+        window.location.href = "login.html";
+      }
+    }
+  </script>
+  <style>
+    /* Additional decoration for payment page */
+    .payment-hero {
+      background: radial-gradient(circle at center, var(--primary-color-extra-light), var(--primary-color));
+      padding: 4rem 1rem;
+      text-align: center;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .payment-hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .payment-hero p {
+      font-size: 1.2rem;
+    }
+    .payment-container {
+      max-width: 600px;
+      margin: 2rem auto;
+    }
+    .bank-details {
+      background: var(--primary-color-light);
+      padding: 2rem;
+      border-radius: 8px;
+      margin: 2rem 0;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    .bank-details:hover {
+      border-color: var(--secondary-color);
+    }
+    .bank-details p {
+      font-size: 1.1rem;
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="schedule.html">Classes Schedule</a></li>
+        <li><a href="trainers.html">Trainers</a></li>
+        <li><a href="facility.html">Facility</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <!-- Payment Hero Section -->
+  <section class="payment-hero">
+    <h1>Payment Instructions</h1>
+    <p>Please follow the instructions below to complete your membership.</p>
+  </section>
+
+  <!-- Payment Details -->
+  <section class="content checkout-content payment-container">
+    <div class="bank-details">
+      <p><strong>1.</strong> Transfer to 0123456789 a/n Cherise Venezia Falens</p>
+      <p><strong>2.</strong> Send payment proof to 0123456789</p>
+      <p><strong>3.</strong> Go to the gym and take your membership card</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Gym Aesthetic. All rights reserved.</p>
+  </footer>
+</body>
+</html>
